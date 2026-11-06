@@ -3,6 +3,8 @@
 
 here is the initial plan for the repo for us to work in : 
 ( the name is not final justa  suggestion i believe we cna find a better name)
+
+
 CivicPulse/
 │
 ├── 01_Data/
