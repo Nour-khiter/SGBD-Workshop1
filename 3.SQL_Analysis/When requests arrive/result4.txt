@@ -1,0 +1,6 @@
+"complaint_type","busiest_hour","requests"
+"Illegal Parking",8,417
+"HEAT/HOT WATER",9,215
+"Blocked Driveway",22,141
+"Noise - Residential",22,527
+"Noise - Street/Sidewalk",22,326
