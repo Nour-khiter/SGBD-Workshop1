@@ -1,0 +1,12 @@
+You are a data analyst. I give you a CSV file with 45,750 NYC 311 service requests from 2024 (a 2% sample).
+
+Problem: New York city managers must decide what to fix first, where to send their teams, and when they need more staff.
+
+Build a dashboard with 3 pages that answers these 4 questions:
+1. What are the most common problems, and which ones are growing?
+2. Where in the city are the most requests and the most unsolved ones?
+3. When do requests arrive (months, days, hours)?
+4. How fast does each agency solve requests, and which is slowest?
+
+Page 1: Overview. Page 2: Geography. Page 3: Performance.
+Then give 3 findings, each with a recommendation for city managers.
