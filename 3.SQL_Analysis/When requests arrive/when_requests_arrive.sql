@@ -1,7 +1,6 @@
 -- =====================================================================
 -- CivicPulse - WHEN do requests arrive?
 -- Business question: when should the city put more staff?
--- Run in pgAdmin (Query Tool, database nyc311): select ONE query, F5.
 -- =====================================================================
 
 
