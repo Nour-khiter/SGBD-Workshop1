@@ -80,3 +80,26 @@ SELECT (SELECT COUNT(*) FROM staging_311)     AS rows_in_csv,
        (SELECT COUNT(*) FROM service_request) AS rows_in_database,
        (SELECT COUNT(*) FROM staging_311)
      - (SELECT COUNT(*) FROM service_request) AS rows_lost;
+
+
+-- Query 3: Which agencies have Closed requests with no usable closing date?
+-- (Closed with an empty closed_date, or closed_date before created_date)
+SELECT agency_code,
+       COUNT(*) FILTER (WHERE closed_date IS NULL)         AS closed_without_date,
+       COUNT(*) FILTER (WHERE closed_date < created_date)  AS closed_before_created
+FROM service_request
+WHERE status = 'Closed'
+GROUP BY agency_code
+HAVING COUNT(*) FILTER (WHERE closed_date IS NULL OR closed_date < created_date) > 0
+ORDER BY closed_without_date DESC;
+
+
+-- Query 4: The requests with a closing date before the creation date:
+-- which status and which agency do they have?
+SELECT status,
+       agency_code,
+       COUNT(*) AS requests
+FROM service_request
+WHERE closed_date < created_date
+GROUP BY status, agency_code
+ORDER BY requests DESC;
