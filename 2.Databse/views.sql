@@ -1,6 +1,5 @@
 -- =====================================================================
--- 05 - Views for the Power BI dashboard
--- A view is a named, stored query: Power BI reads it like a table, and
+-- Views for the Power BI dashboard
 -- =====================================================================
 
 DROP VIEW IF EXISTS
@@ -9,6 +8,8 @@ DROP VIEW IF EXISTS
     v_busiest_hour_by_type,
     v_monthly_requests, v_requests_by_borough, v_open_requests_by_borough,
     v_top_complaint_types, v_top3_types_by_borough, v_top_zip_codes,
+    v_resolution_by_type, v_resolution_by_agency, v_open_closed_by_agency,
+    v_solved_within_by_agency,
     v_requests
 CASCADE;
 
@@ -19,6 +20,7 @@ CASCADE;
 
 -- v_requests: one row per request, with the names from the 3 other tables.
 -- Business rule: resolution_time is only computed when the closing date
+-- exists and is not before the creation date.
 CREATE VIEW v_requests AS
 SELECT
     sr.request_id,
@@ -78,7 +80,7 @@ FROM service_request WHERE latitude IS NULL OR longitude IS NULL;
 
 
 -- =====================================================================
--- WHEN do requests arrive?  (file 3.SQL_Analysis/when_requests_arrive.sql)
+-- WHEN do requests arrive?  (file when_requests_arrive.sql)
 -- =====================================================================
 
 CREATE VIEW v_requests_by_hour AS
@@ -125,7 +127,7 @@ WHERE rank = 1;
 
 
 -- =====================================================================
--- WHAT and WHERE  (file 3.SQL_Analysis/demand_and_geography.sql)
+-- WHAT and WHERE  (file demand_and_geography.sql)
 -- =====================================================================
 
 CREATE VIEW v_monthly_requests AS
@@ -148,6 +150,7 @@ FROM service_request sr
 JOIN location l ON sr.location_id = l.location_id
 GROUP BY l.borough;
 
+-- open = any status other than 'Closed'; open rate = open / total of the borough
 CREATE VIEW v_open_requests_by_borough AS
 SELECT l.borough,
        COUNT(*) AS total_requests,
@@ -196,11 +199,77 @@ LIMIT 10;
 
 
 -- =====================================================================
--- Not completed..
+-- HOW FAST  (files 03_resolution_analysis.sql and 04_agency_analysis.sql)
 -- =====================================================================
 
+-- Query 1: typical time to solve a request, per complaint type
+CREATE VIEW v_resolution_by_type AS
+SELECT ct.complaint_type,
+       COUNT(*) AS nb_closed,
+       ROUND(CAST(PERCENTILE_CONT(0.5) WITHIN GROUP (
+         ORDER BY EXTRACT(EPOCH FROM (sr.closed_date - sr.created_date))/3600
+       ) AS NUMERIC), 1) AS median_hours,
+       ROUND(CAST(PERCENTILE_CONT(0.5) WITHIN GROUP (
+         ORDER BY EXTRACT(EPOCH FROM (sr.closed_date - sr.created_date))/86400
+       ) AS NUMERIC), 1) AS median_days
+FROM service_request sr
+JOIN complaint_type ct ON ct.complaint_type_id = sr.complaint_type_id
+WHERE sr.closed_date IS NOT NULL
+  AND sr.closed_date >= sr.created_date
+GROUP BY ct.complaint_type;
 
--- list all the views
+-- Query 2: typical solving time and number of requests, per agency
+CREATE VIEW v_resolution_by_agency AS
+SELECT a.agency_code,
+       a.agency_name,
+       COUNT(*) AS nb_requests,
+       COUNT(*) FILTER (WHERE sr.closed_date IS NOT NULL
+                        AND sr.closed_date >= sr.created_date) AS nb_closed_valid,
+       ROUND(CAST(PERCENTILE_CONT(0.5) WITHIN GROUP (
+         ORDER BY EXTRACT(EPOCH FROM (sr.closed_date - sr.created_date))/3600
+       ) FILTER (WHERE sr.closed_date IS NOT NULL
+                 AND sr.closed_date >= sr.created_date) AS NUMERIC), 1) AS median_hours,
+       ROUND(CAST(PERCENTILE_CONT(0.5) WITHIN GROUP (
+         ORDER BY EXTRACT(EPOCH FROM (sr.closed_date - sr.created_date))/86400
+       ) FILTER (WHERE sr.closed_date IS NOT NULL
+                 AND sr.closed_date >= sr.created_date) AS NUMERIC), 1) AS median_days
+FROM service_request sr
+JOIN agency a ON a.agency_code = sr.agency_code
+GROUP BY a.agency_code, a.agency_name;
+
+-- Query 3: number of open and closed requests, per agency
+CREATE VIEW v_open_closed_by_agency AS
+SELECT a.agency_code,
+       a.agency_name,
+       COUNT(*) AS nb_requests,
+       COUNT(*) FILTER (WHERE sr.status <> 'Closed') AS open_requests,
+       COUNT(*) FILTER (WHERE sr.status = 'Closed')  AS closed_requests,
+       ROUND(100.0 * COUNT(*) FILTER (WHERE sr.status <> 'Closed') / COUNT(*), 1) AS pct_open
+FROM service_request sr
+JOIN agency a ON a.agency_code = sr.agency_code
+GROUP BY a.agency_code, a.agency_name;
+
+-- Query 4: % of requests solved within 24 hours and within 7 days, per agency
+CREATE VIEW v_solved_within_by_agency AS
+SELECT a.agency_code,
+       a.agency_name,
+       COUNT(*) AS nb_requests,
+       COUNT(*) FILTER (WHERE sr.closed_date IS NOT NULL
+                        AND sr.closed_date >= sr.created_date) AS nb_closed_valid,
+       ROUND(100.0 * COUNT(*) FILTER (WHERE sr.closed_date >= sr.created_date
+                        AND sr.closed_date - sr.created_date <= INTERVAL '24 hours')
+             / NULLIF(COUNT(*) FILTER (WHERE sr.closed_date IS NOT NULL
+                        AND sr.closed_date >= sr.created_date), 0), 1) AS pct_24h,
+       ROUND(100.0 * COUNT(*) FILTER (WHERE sr.closed_date >= sr.created_date
+                        AND sr.closed_date - sr.created_date <= INTERVAL '7 days')
+             / NULLIF(COUNT(*) FILTER (WHERE sr.closed_date IS NOT NULL
+                        AND sr.closed_date >= sr.created_date), 0), 1) AS pct_7d
+FROM service_request sr
+JOIN agency a ON a.agency_code = sr.agency_code
+GROUP BY a.agency_code, a.agency_name;
+
+
+-- Check: list all the views
 SELECT table_name AS view_name
 FROM information_schema.views
 WHERE table_schema = 'public'
