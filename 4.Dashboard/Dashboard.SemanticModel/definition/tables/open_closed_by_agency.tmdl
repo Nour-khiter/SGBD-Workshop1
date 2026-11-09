@@ -1,0 +1,72 @@
+table open_closed_by_agency
+	lineageTag: 0cdb5f0d-e0cf-4dbd-ac88-ea2c1c916a8c
+
+	column agency_code
+		dataType: string
+		lineageTag: 5002b677-4297-41f8-87c3-f6ccbe1a6599
+		summarizeBy: none
+		sourceColumn: agency_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column agency_name
+		dataType: string
+		lineageTag: f697035b-eefc-47c9-bd6f-b54274be0c16
+		summarizeBy: none
+		sourceColumn: agency_name
+
+	column nb_requests
+		dataType: int64
+		formatString: 0
+		lineageTag: 5d206b80-25ac-4a36-abd5-685ec1829411
+		summarizeBy: none
+		sourceColumn: nb_requests
+
+		annotation SummarizationSetBy = Automatic
+
+	column open_requests
+		dataType: int64
+		formatString: 0
+		lineageTag: 98164fb5-16f7-4425-b93f-f0085f0f3c79
+		summarizeBy: none
+		sourceColumn: open_requests
+
+		annotation SummarizationSetBy = Automatic
+
+	column closed_requests
+		dataType: int64
+		formatString: 0
+		lineageTag: e61668a3-484b-420d-a9a7-6cdaad4fac9e
+		summarizeBy: none
+		sourceColumn: closed_requests
+
+		annotation SummarizationSetBy = Automatic
+
+	column pct_open
+		dataType: double
+		lineageTag: 70f84557-6151-491a-b0d3-cd8ffa011317
+		summarizeBy: none
+		sourceColumn: pct_open
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column agency_label
+		dataType: string
+		lineageTag: d7fac4aa-2063-4644-9c8d-844d0b450dd1
+		summarizeBy: none
+		sourceColumn: agency_label
+
+	partition open_closed_by_agency = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "nyc311"),
+				    public_v_open_closed_by_agency = Source{[Schema="public",Item="v_open_closed_by_agency"]}[Data],
+				    AddAgencyLabel = Table.AddColumn(public_v_open_closed_by_agency, "agency_label", each if [agency_code] = "DHS" then [agency_name] & " (partial)" else if [agency_code] = "OTI" then [agency_name] & " (n=5, small)" else if [agency_code] = "DOE" then [agency_name] & " (n=17, small)" else [agency_name], type text)
+				in
+				    AddAgencyLabel
+
+	annotation PBI_ResultType = Table
+

@@ -23,8 +23,13 @@ CivicPulse/
 │   ├── 03_resolution_analysis.sql
 │   └── 04_agency_analysis.sql
 │
-├── 04_Dashboard/
-│   └── CivicPulse.pbix
+├── 4.Dashboard/
+│   ├── Dashboard.pbip
+│   ├── Dashboard.Report/          # Editable report pages, visuals, and theme
+│   ├── Dashboard.SemanticModel/   # PostgreSQL-backed model and SQL view queries
+│   ├── Dashboard.pbix             # Power BI Desktop handoff copy
+│   ├── build_pbir.py              # Rebuilds the Overview and Geography PBIR pages
+│   └── Dashboard_Design.md        # Page layout and metric notes
 │
 ├── 05_AI_Comparison/
 │   ├── prompt.txt

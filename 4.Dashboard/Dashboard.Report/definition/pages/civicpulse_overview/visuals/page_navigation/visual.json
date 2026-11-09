@@ -1,0 +1,31 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "page_navigation",
+  "position": {
+    "x": 30,
+    "y": 96,
+    "z": 1000,
+    "width": 700,
+    "height": 48,
+    "tabOrder": 126
+  },
+  "visual": {
+    "visualType": "pageNavigator",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "orientation": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Horizontal'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

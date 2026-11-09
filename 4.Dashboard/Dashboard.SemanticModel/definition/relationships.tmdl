@@ -1,0 +1,82 @@
+relationship 4392ba57-eafc-481b-8b85-49ebd09e5cc2
+	joinOnDateBehavior: datePartOnly
+	fromColumn: monthly_requests.month
+	toColumn: LocalDateTable_d7cb0a49-6d61-4963-b9ea-7fc7e7c62c1f.Date
+
+relationship 2906d073-15e9-4f38-8746-37bf1218d451
+	joinOnDateBehavior: datePartOnly
+	fromColumn: requests.created_date
+	toColumn: LocalDateTable_1be376b7-2b16-4c47-ac02-97817cf248d4.Date
+
+relationship 9f5c4c10-f26e-41ea-973c-b67982f9d3c9
+	joinOnDateBehavior: datePartOnly
+	fromColumn: requests.closed_date
+	toColumn: LocalDateTable_aa1de1f3-ed31-47dd-bc68-ab97c4e113bc.Date
+
+relationship d3d80062-a97e-47ef-a61d-f4eab895eb04
+	joinOnDateBehavior: datePartOnly
+	fromColumn: requests.month
+	toColumn: LocalDateTable_f922610e-5211-4369-bbb0-d35bd1a74c8a.Date
+
+relationship AutoDetected_5a176c95-f8c1-4fa1-bc6f-1025faee4b97
+	fromColumn: requests.agency_code
+	toColumn: open_closed_by_agency.agency_code
+
+relationship AutoDetected_29129ce2-0c66-48ff-8bea-31c54df8f5ee
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: resolution_by_agency.agency_code
+	toColumn: open_closed_by_agency.agency_code
+
+relationship AutoDetected_db7f8b0a-2721-4bbd-a7f5-e2bad99e70a1
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: solved_within_by_agency.agency_code
+	toColumn: open_closed_by_agency.agency_code
+
+relationship AutoDetected_592f9c8f-6b9d-40c1-ab0b-1ec35647ab02
+	isActive: false
+	fromColumn: requests.agency_name
+	toColumn: resolution_by_agency.agency_name
+
+relationship AutoDetected_3bcfd1ad-2d21-43e2-8cf6-6bd21fa78c26
+	isActive: false
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: solved_within_by_agency.agency_name
+	toColumn: resolution_by_agency.agency_name
+
+relationship AutoDetected_dfcda07e-6285-4a8b-ba92-41c6596d761e
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: open_requests_by_borough.borough
+	toColumn: requests_by_borough.borough
+
+relationship AutoDetected_7bc0accf-06dc-4a01-82b5-8d326d4a18ee
+	fromColumn: requests.borough
+	toColumn: requests_by_borough.borough
+
+relationship AutoDetected_fcb7a5af-223d-4db4-b567-6634ede3ce95
+	fromColumn: top3_types_by_borough.borough
+	toColumn: requests_by_borough.borough
+
+relationship AutoDetected_f0469f52-d2fe-4595-a3a1-82a8b11d36ea
+	fromColumn: requests.hour_of_day
+	toColumn: requests_by_hour.hour_of_day
+
+relationship AutoDetected_ec74b595-7ec8-4146-87da-b26294c23545
+	fromColumn: requests_by_weekday_hour.hour_of_day
+	toColumn: requests_by_hour.hour_of_day
+
+relationship AutoDetected_24688068-1331-4733-bd0b-411a7a56406d
+	fromColumn: requests.weekday_number
+	toColumn: requests_by_weekday.weekday_number
+
+relationship AutoDetected_0376d357-1a1b-4f7d-8fec-910cf30b77ce
+	fromColumn: requests_by_weekday_hour.weekday_number
+	toColumn: requests_by_weekday.weekday_number
+
+relationship AutoDetected_14c7355b-0821-4c4e-b2ad-1a254b11a5f8
+	fromColumn: top3_types_by_borough.complaint_type
+	toColumn: top_complaint_types.complaint_type
+

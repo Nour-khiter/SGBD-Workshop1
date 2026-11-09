@@ -1,0 +1,80 @@
+table resolution_by_agency
+	lineageTag: 566ef536-96a7-4a79-9042-0fdfe7717695
+
+	measure 'Highlight Color resolution_by_agency' = IF(MAX(resolution_by_agency[median_days]) = CALCULATE(MAX(resolution_by_agency[median_days]), ALLSELECTED(resolution_by_agency[agency_label])), "#E8710A", "#B8C4D6")
+		formatString: @
+		lineageTag: 861a649c-1c47-4969-afcf-eb4e6bc32981
+
+	column agency_code
+		dataType: string
+		lineageTag: 4448f86b-44f8-4f57-9b61-61651868de7e
+		summarizeBy: none
+		sourceColumn: agency_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column agency_name
+		dataType: string
+		lineageTag: 99d48d80-5999-4a68-8c94-965946f3be28
+		summarizeBy: none
+		sourceColumn: agency_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column nb_requests
+		dataType: int64
+		formatString: 0
+		lineageTag: e153acea-f4af-43d5-b93f-4697bd0a9081
+		summarizeBy: sum
+		sourceColumn: nb_requests
+
+		annotation SummarizationSetBy = Automatic
+
+	column nb_closed_valid
+		dataType: int64
+		formatString: 0
+		lineageTag: 4b3de875-8d03-4c69-80e4-1b5584c71710
+		summarizeBy: sum
+		sourceColumn: nb_closed_valid
+
+		annotation SummarizationSetBy = Automatic
+
+	column median_hours
+		dataType: double
+		lineageTag: c6181ee4-d1e9-4335-abde-8426e3fdb12a
+		summarizeBy: sum
+		sourceColumn: median_hours
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column median_days
+		dataType: double
+		formatString: 0.0
+		lineageTag: b642d194-4689-4fbc-b4f3-b0b5699330e9
+		summarizeBy: none
+		sourceColumn: median_days
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column agency_label
+		dataType: string
+		lineageTag: a99a2452-5f65-4dc4-8716-2d25e2fbba71
+		summarizeBy: none
+		sourceColumn: agency_label
+
+	partition resolution_by_agency = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "nyc311"),
+				    public_v_resolution_by_agency = Source{[Schema="public",Item="v_resolution_by_agency"]}[Data],
+				    AddAgencyLabel = Table.AddColumn(public_v_resolution_by_agency, "agency_label", each if [agency_code] = "DHS" then [agency_name] & " (partial)" else if [agency_code] = "OTI" then [agency_name] & " (n=5, small)" else if [agency_code] = "DOE" then [agency_name] & " (n=17, small)" else [agency_name], type text)
+				in
+				    AddAgencyLabel
+
+	annotation PBI_ResultType = Table
+

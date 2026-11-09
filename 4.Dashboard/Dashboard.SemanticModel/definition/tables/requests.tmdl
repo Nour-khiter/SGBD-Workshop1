@@ -1,0 +1,179 @@
+table requests
+	lineageTag: ecdd093e-ae59-46a4-8b23-1767ca4a3e09
+
+	column request_id
+		dataType: int64
+		formatString: 0
+		lineageTag: f2a7aa12-3f3b-49a7-bd08-a92fca520a2d
+		summarizeBy: sum
+		sourceColumn: request_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column created_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 23594807-ad27-45f4-a04f-30eaf03e6443
+		summarizeBy: none
+		sourceColumn: created_date
+
+		variation Variation
+			isDefault
+			relationship: 2906d073-15e9-4f38-8746-37bf1218d451
+			defaultHierarchy: LocalDateTable_1be376b7-2b16-4c47-ac02-97817cf248d4.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column closed_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 3184b299-4d55-41e9-a16a-cd515753a79f
+		summarizeBy: none
+		sourceColumn: closed_date
+
+		variation Variation
+			isDefault
+			relationship: 9f5c4c10-f26e-41ea-973c-b67982f9d3c9
+			defaultHierarchy: LocalDateTable_aa1de1f3-ed31-47dd-bc68-ab97c4e113bc.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column month
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 4745ed11-eb57-47ad-bce6-b9a683e277fe
+		summarizeBy: none
+		sourceColumn: month
+
+		variation Variation
+			isDefault
+			relationship: d3d80062-a97e-47ef-a61d-f4eab895eb04
+			defaultHierarchy: LocalDateTable_f922610e-5211-4369-bbb0-d35bd1a74c8a.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column hour_of_day
+		dataType: double
+		lineageTag: 4acfe740-6235-42cf-aec6-9cb320439853
+		summarizeBy: none
+		sourceColumn: hour_of_day
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column weekday_number
+		dataType: double
+		lineageTag: db0f7405-e9e3-49d4-a168-90c2f50eee5c
+		summarizeBy: none
+		sourceColumn: weekday_number
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column status
+		dataType: string
+		lineageTag: 3d45efd4-3719-4f57-a13c-0cd6411a8a2a
+		summarizeBy: none
+		sourceColumn: status
+
+		annotation SummarizationSetBy = Automatic
+
+	column channel
+		dataType: string
+		lineageTag: 15571813-8037-43f6-93e3-3b4df1ac604c
+		summarizeBy: none
+		sourceColumn: channel
+
+		annotation SummarizationSetBy = Automatic
+
+	column agency_code
+		dataType: string
+		lineageTag: 0e71e4aa-8a96-4084-9fe5-a1b15b804bbb
+		summarizeBy: none
+		sourceColumn: agency_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column agency_name
+		dataType: string
+		lineageTag: 560fc54b-be0c-4fa6-8868-5455760d86fb
+		summarizeBy: none
+		sourceColumn: agency_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column complaint_type
+		dataType: string
+		lineageTag: 519f1951-7ca1-4050-a8fb-8699f608caf4
+		summarizeBy: none
+		sourceColumn: complaint_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column descriptor
+		dataType: string
+		lineageTag: 8c8b8d68-b741-4cc2-a509-fc4cc8ca9c40
+		summarizeBy: none
+		sourceColumn: descriptor
+
+		annotation SummarizationSetBy = Automatic
+
+	column borough
+		dataType: string
+		lineageTag: 28fcdf62-9122-47a9-ba4c-72b19b5f80ce
+		summarizeBy: none
+		sourceColumn: borough
+
+		annotation SummarizationSetBy = Automatic
+
+	column incident_zip
+		dataType: string
+		lineageTag: 05872751-c218-47a0-904c-0bcba9df743d
+		summarizeBy: none
+		sourceColumn: incident_zip
+
+		annotation SummarizationSetBy = Automatic
+
+	column latitude
+		dataType: double
+		lineageTag: 800ac241-24fb-4ef5-aaec-947c4b107dbb
+		summarizeBy: sum
+		sourceColumn: latitude
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column longitude
+		dataType: double
+		lineageTag: 43706ae7-e9ff-41e1-b995-54300e8fcffc
+		summarizeBy: sum
+		sourceColumn: longitude
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column resolution_time
+		dataType: double
+		lineageTag: 1643179c-2c04-4175-8fc3-f0d860e84323
+		summarizeBy: sum
+		sourceColumn: resolution_time
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition requests = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "nyc311"),
+				    public_v_requests = Source{[Schema="public",Item="v_requests"]}[Data]
+				in
+				    public_v_requests
+
+	annotation PBI_ResultType = Table
+

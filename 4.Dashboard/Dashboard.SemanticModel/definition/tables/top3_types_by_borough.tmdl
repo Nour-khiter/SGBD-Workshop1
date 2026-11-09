@@ -1,0 +1,48 @@
+table top3_types_by_borough
+	lineageTag: baaf6a44-c90c-4278-95dd-30b107eb104b
+
+	column borough
+		dataType: string
+		lineageTag: 0bb97335-1f39-4a1f-84cd-1951c0559b06
+		summarizeBy: none
+		sourceColumn: borough
+
+		annotation SummarizationSetBy = Automatic
+
+	column rank
+		dataType: int64
+		formatString: 0
+		lineageTag: 3a7908cf-bc2c-43a3-94c1-a8536b116401
+		summarizeBy: sum
+		sourceColumn: rank
+
+		annotation SummarizationSetBy = Automatic
+
+	column complaint_type
+		dataType: string
+		lineageTag: 6ac9c5ec-7c8c-4c27-8897-be230baa936f
+		summarizeBy: none
+		sourceColumn: complaint_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column requests
+		dataType: int64
+		formatString: 0
+		lineageTag: 7b2cc797-2639-4fb1-a225-fc2f39c2a20b
+		summarizeBy: sum
+		sourceColumn: requests
+
+		annotation SummarizationSetBy = Automatic
+
+	partition top3_types_by_borough = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "nyc311"),
+				    public_v_top3_types_by_borough = Source{[Schema="public",Item="v_top3_types_by_borough"]}[Data]
+				in
+				    public_v_top3_types_by_borough
+
+	annotation PBI_ResultType = Table
+

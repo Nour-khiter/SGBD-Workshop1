@@ -1,0 +1,39 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "page_title",
+  "position": {
+    "x": 30,
+    "y": 22,
+    "z": 1000,
+    "width": 1250,
+    "height": 58,
+    "tabOrder": 52
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Resolution speed varies by agency and problem type",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI",
+                      "fontSize": 25,
+                      "color": "#17324D",
+                      "bold": true
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

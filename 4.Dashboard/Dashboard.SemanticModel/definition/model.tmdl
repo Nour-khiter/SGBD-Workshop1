@@ -1,0 +1,38 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	valueFilterBehavior: independent
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["kpi_overview","monthly_requests","open_closed_by_agency","open_requests_by_borough","requests","requests_by_hour","requests_by_borough","requests_by_weekday","requests_by_weekday_hour","resolution_by_agency","resolution_by_type","top_complaint_types","solved_within_by_agency","top3_types_by_borough","top_zip_codes"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table kpi_overview
+ref table monthly_requests
+ref table DateTableTemplate_2a6d3685-b443-45c1-81d9-a3f5d3a8f741
+ref table LocalDateTable_d7cb0a49-6d61-4963-b9ea-7fc7e7c62c1f
+ref table open_closed_by_agency
+ref table open_requests_by_borough
+ref table requests
+ref table LocalDateTable_1be376b7-2b16-4c47-ac02-97817cf248d4
+ref table LocalDateTable_aa1de1f3-ed31-47dd-bc68-ab97c4e113bc
+ref table LocalDateTable_f922610e-5211-4369-bbb0-d35bd1a74c8a
+ref table requests_by_hour
+ref table requests_by_borough
+ref table requests_by_weekday
+ref table requests_by_weekday_hour
+ref table resolution_by_agency
+ref table resolution_by_type
+ref table top_complaint_types
+ref table solved_within_by_agency
+ref table top3_types_by_borough
+ref table top_zip_codes
+
+ref cultureInfo en-US
+

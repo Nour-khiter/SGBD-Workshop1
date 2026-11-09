@@ -1,0 +1,55 @@
+table requests_by_weekday
+	lineageTag: bd21b4e5-8b76-43ca-b941-2d3f970c8d25
+
+	measure 'Highlight Color requests_by_weekday' = IF(MAX(requests_by_weekday[requests]) = CALCULATE(MAX(requests_by_weekday[requests]), ALLSELECTED(requests_by_weekday[weekday_name])), "#0B4F9E", "#B8C4D6")
+		formatString: @
+		lineageTag: 6d92b475-54a4-42cf-8f17-f821f91d4c0a
+
+	column weekday_number
+		dataType: double
+		lineageTag: 5a1b218b-e979-4a4f-9900-4a72e44c501b
+		summarizeBy: none
+		sourceColumn: weekday_number
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column requests
+		dataType: int64
+		formatString: 0
+		lineageTag: 735d4fc7-7b24-4ec5-bbb1-ffd080ab002a
+		summarizeBy: sum
+		sourceColumn: requests
+
+		annotation SummarizationSetBy = Automatic
+
+	column pct_of_requests
+		dataType: double
+		lineageTag: da0fa767-f3b0-4cff-bbae-f89108468685
+		summarizeBy: sum
+		sourceColumn: pct_of_requests
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column weekday_name
+		dataType: string
+		lineageTag: 1fd44a4c-65a8-4371-9d31-06ba20454c4c
+		summarizeBy: none
+		sourceColumn: weekday_name
+		sortByColumn: weekday_number
+
+	partition requests_by_weekday = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "nyc311"),
+				    public_v_requests_by_weekday = Source{[Schema="public",Item="v_requests_by_weekday"]}[Data],
+				    AddWeekdayName = Table.AddColumn(public_v_requests_by_weekday, "weekday_name", each {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"}{Number.From([weekday_number]) - 1}, type text)
+				in
+				    AddWeekdayName
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,50 @@
+table monthly_requests
+	lineageTag: c89b60eb-6a39-450a-a2bc-015ca27374fe
+
+	measure 'Highlight Color monthly_requests' = IF(MAX(monthly_requests[total_requests]) = CALCULATE(MAX(monthly_requests[total_requests]), ALLSELECTED(monthly_requests[month])), "#0B4F9E", "#B8C4D6")
+		formatString: @
+		lineageTag: 3b8eab31-1be6-4e1d-93f8-f7a1173bc3b8
+
+	column month
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: adbc894d-0102-498a-abf4-370551f5ce2c
+		summarizeBy: none
+		sourceColumn: month
+
+		variation Variation
+			isDefault
+			relationship: 4392ba57-eafc-481b-8b85-49ebd09e5cc2
+			defaultHierarchy: LocalDateTable_d7cb0a49-6d61-4963-b9ea-7fc7e7c62c1f.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column total_requests
+		dataType: int64
+		formatString: 0
+		lineageTag: 4407f8f7-12ce-45d3-9bd0-da81148afc0d
+		summarizeBy: sum
+		sourceColumn: total_requests
+
+		annotation SummarizationSetBy = Automatic
+
+	column net_change
+		dataType: int64
+		formatString: 0
+		lineageTag: 983a179b-f81c-4661-99fe-44f6234bc6ee
+		summarizeBy: sum
+		sourceColumn: net_change
+
+		annotation SummarizationSetBy = Automatic
+
+	partition monthly_requests = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "nyc311"),
+				    public_v_monthly_requests = Source{[Schema="public",Item="v_monthly_requests"]}[Data]
+				in
+				    public_v_monthly_requests
+
+	annotation PBI_ResultType = Table
+

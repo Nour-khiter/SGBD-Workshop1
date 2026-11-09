@@ -1,0 +1,35 @@
+table top_complaint_types
+	lineageTag: 8a2410d3-735b-458a-abec-fb6a8a879460
+
+	measure 'Highlight Color top_complaint_types' = IF(MAX(top_complaint_types[request_count]) = CALCULATE(MAX(top_complaint_types[request_count]), ALLSELECTED(top_complaint_types[complaint_type])), "#0B4F9E", "#B8C4D6")
+		formatString: @
+		lineageTag: 41fa80b2-9fc4-4ce6-9ca1-4f82e2336ae8
+
+	column complaint_type
+		dataType: string
+		lineageTag: cc6cce37-2dbb-4339-ba4e-e139167091b0
+		summarizeBy: none
+		sourceColumn: complaint_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column request_count
+		dataType: int64
+		formatString: 0
+		lineageTag: d1a1a4b2-bc8e-4f19-bfcf-354d4f67129e
+		summarizeBy: none
+		sourceColumn: request_count
+
+		annotation SummarizationSetBy = Automatic
+
+	partition top_complaint_types = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "nyc311"),
+				    public_v_top_complaint_types = Source{[Schema="public",Item="v_top_complaint_types"]}[Data]
+				in
+				    public_v_top_complaint_types
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,39 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "sample_footer",
+  "position": {
+    "x": 30,
+    "y": 1032,
+    "z": 1000,
+    "width": 1250,
+    "height": 30,
+    "tabOrder": 1062
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "2% sample of 2024 requests. Compare shares and rankings, not city totals.",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI",
+                      "fontSize": 12,
+                      "color": "#536575",
+                      "bold": false
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

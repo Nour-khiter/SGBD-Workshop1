@@ -1,0 +1,64 @@
+table requests_by_borough
+	lineageTag: 01a3caaa-2ca6-46da-ad89-f88e81b3d2e5
+
+	measure 'Borough Requests' = SUM(requests_by_borough[total_requests])
+		formatString: #,0
+		lineageTag: 45af1c27-2479-40f3-952b-d9319524832d
+
+	measure 'Highlight Color requests_by_borough' = IF(MAX(requests_by_borough[total_requests]) = CALCULATE(MAX(requests_by_borough[total_requests]), ALLSELECTED(requests_by_borough[borough])), "#0B4F9E", "#B8C4D6")
+		formatString: @
+		lineageTag: 5f8671e9-a906-42d6-9241-610bbb9bf463
+
+	column borough
+		dataType: string
+		lineageTag: f3ea7030-ce9e-4674-8c9f-f46fe91e14cc
+		summarizeBy: none
+		sourceColumn: borough
+
+		annotation SummarizationSetBy = Automatic
+
+	column total_requests
+		dataType: int64
+		formatString: 0
+		lineageTag: a30f62c3-784f-40dd-9976-54aa6871b24b
+		summarizeBy: sum
+		sourceColumn: total_requests
+
+		annotation SummarizationSetBy = Automatic
+
+	column request_pct
+		dataType: double
+		lineageTag: 7bbf596d-068a-4d8b-a7d5-27cc3216c052
+		summarizeBy: sum
+		sourceColumn: request_pct
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column map_latitude
+		dataType: double
+		lineageTag: 43289c79-6503-49bc-bc08-6945a3030d11
+		summarizeBy: none
+		sourceColumn: map_latitude
+
+	column map_longitude
+		dataType: double
+		lineageTag: c7601d94-9e47-4233-9577-ab2819cf1263
+		summarizeBy: none
+		sourceColumn: map_longitude
+
+	partition requests_by_borough = m
+		mode: import
+		source =
+				let
+					    Source = PostgreSQL.Database("localhost", "nyc311"),
+				    public_v_requests_by_borough = Source{[Schema="public",Item="v_requests_by_borough"]}[Data],
+				    BoroughRows = Table.SelectRows(public_v_requests_by_borough, each [borough] <> null and Text.Upper([borough]) <> "UNSPECIFIED"),
+				    AddLatitude = Table.AddColumn(BoroughRows, "map_latitude", each if Text.Upper([borough]) = "BRONX" then 40.8448 else if Text.Upper([borough]) = "BROOKLYN" then 40.6782 else if Text.Upper([borough]) = "MANHATTAN" then 40.7831 else if Text.Upper([borough]) = "QUEENS" then 40.7282 else if Text.Upper([borough]) = "STATEN ISLAND" then 40.5795 else null, type number),
+				    AddLongitude = Table.AddColumn(AddLatitude, "map_longitude", each if Text.Upper([borough]) = "BRONX" then -73.8648 else if Text.Upper([borough]) = "BROOKLYN" then -73.9442 else if Text.Upper([borough]) = "MANHATTAN" then -73.9712 else if Text.Upper([borough]) = "QUEENS" then -73.7949 else if Text.Upper([borough]) = "STATEN ISLAND" then -74.1502 else null, type number)
+					in
+				    AddLongitude
+
+	annotation PBI_ResultType = Table
+

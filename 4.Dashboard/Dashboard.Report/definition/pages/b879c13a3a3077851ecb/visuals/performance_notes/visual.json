@@ -1,0 +1,39 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "performance_notes",
+  "position": {
+    "x": 30,
+    "y": 1000,
+    "z": 1000,
+    "width": 1860,
+    "height": 25,
+    "tabOrder": 1030
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "DHS (partial): valid closing dates for 354 of 685 requests. OTI (5) and DOE (17) are small samples. Types with <30 closed requests and medians >365 days are omitted.",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI",
+                      "fontSize": 13,
+                      "color": "#596A78",
+                      "bold": false
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

@@ -1,0 +1,140 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "within_targets",
+  "position": {
+    "x": 30,
+    "y": 570,
+    "z": 0,
+    "width": 900,
+    "height": 420,
+    "tabOrder": 600
+  },
+  "visual": {
+    "visualType": "clusteredBarChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "solved_within_by_agency"
+                    }
+                  },
+                  "Property": "agency_label"
+                }
+              },
+              "queryRef": "solved_within_by_agency.agency_label"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "solved_within_by_agency"
+                        }
+                      },
+                      "Property": "pct_24h"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(solved_within_by_agency.pct_24h)",
+              "nativeQueryRef": "Within 24 h"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "solved_within_by_agency"
+                        }
+                      },
+                      "Property": "pct_7d"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(solved_within_by_agency.pct_7d)",
+              "nativeQueryRef": "Within 7 days"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "solved_within_by_agency"
+                  }
+                },
+                "Property": "agency_label"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'% closed within target | valid-date denominator'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "subTitle": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true,
+    "objects": {
+      "labels": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

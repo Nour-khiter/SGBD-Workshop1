@@ -1,0 +1,55 @@
+table open_requests_by_borough
+	lineageTag: 4ae752fb-3408-450c-8175-eea236a77627
+
+	measure 'Highlight Color open_requests_by_borough' = IF(MAX(open_requests_by_borough[open_rate_pct]) = CALCULATE(MAX(open_requests_by_borough[open_rate_pct]), ALLSELECTED(open_requests_by_borough[borough])), "#E8710A", "#B8C4D6")
+		formatString: @
+		lineageTag: 8c73d482-5267-4c8a-a43a-3f55e112ae1e
+
+	column borough
+		dataType: string
+		lineageTag: 8c5050a4-d6f0-4570-a694-12aa8333ef94
+		summarizeBy: none
+		sourceColumn: borough
+
+		annotation SummarizationSetBy = Automatic
+
+	column total_requests
+		dataType: int64
+		formatString: 0
+		lineageTag: 5c6f4589-e000-460f-91de-dab69c97fba9
+		summarizeBy: sum
+		sourceColumn: total_requests
+
+		annotation SummarizationSetBy = Automatic
+
+	column open_requests
+		dataType: int64
+		formatString: 0
+		lineageTag: aa1135c9-c255-4b41-970e-6edba339fc83
+		summarizeBy: sum
+		sourceColumn: open_requests
+
+		annotation SummarizationSetBy = Automatic
+
+	column open_rate_pct
+		dataType: double
+		formatString: 0.00"%"
+		lineageTag: a8ff3def-e46e-49a8-9493-151ab410e751
+		summarizeBy: sum
+		sourceColumn: open_rate_pct
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition open_requests_by_borough = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "nyc311"),
+				    public_v_open_requests_by_borough = Source{[Schema="public",Item="v_open_requests_by_borough"]}[Data]
+				in
+				    public_v_open_requests_by_borough
+
+	annotation PBI_ResultType = Table
+

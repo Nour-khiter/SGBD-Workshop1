@@ -1,0 +1,9 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/pagesMetadata/1.1.0/schema.json",
+  "pageOrder": [
+    "civicpulse_overview",
+    "civicpulse_geography",
+    "b879c13a3a3077851ecb"
+  ],
+  "activePageName": "civicpulse_overview"
+}

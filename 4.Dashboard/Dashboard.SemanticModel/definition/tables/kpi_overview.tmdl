@@ -1,0 +1,66 @@
+table kpi_overview
+	lineageTag: 5ff53cfb-9453-42f0-98f4-27f8a92ac130
+
+	measure 'Total Requests' = MAX(kpi_overview[total_requests])
+		formatString: #,0
+		lineageTag: abb29c24-2557-4193-962c-f707c231efa0
+
+	measure 'Open Requests' = MAX(kpi_overview[open_requests])
+		formatString: #,0
+		lineageTag: 08b53717-4b88-43f4-93a9-c6024d3ff90d
+
+	measure 'Closure Rate' = MAX(kpi_overview[closure_rate_pct])
+		formatString: 0.0"%"
+		lineageTag: 21e47cf8-1f78-49e4-a1ed-1aaa44aae9d0
+
+	measure 'Median Resolution Hours' = MAX(kpi_overview[median_resolution_time]) * 24
+		formatString: 0.00
+		lineageTag: 1fa2f348-fc17-45a2-a8c9-1fb95514f3e1
+
+	column total_requests
+		dataType: int64
+		formatString: 0
+		lineageTag: f7ed8f24-adbc-4ae7-986e-d418f5ef5eac
+		summarizeBy: sum
+		sourceColumn: total_requests
+
+		annotation SummarizationSetBy = Automatic
+
+	column open_requests
+		dataType: int64
+		formatString: 0
+		lineageTag: 5c67bea5-85eb-4ea5-8c0b-8528644b7313
+		summarizeBy: sum
+		sourceColumn: open_requests
+
+		annotation SummarizationSetBy = Automatic
+
+	column closure_rate_pct
+		dataType: double
+		lineageTag: 482a095b-0449-4206-a3d1-79064e74eb55
+		summarizeBy: sum
+		sourceColumn: closure_rate_pct
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column median_resolution_time
+		dataType: double
+		lineageTag: 41c050cd-cb4d-42ad-aed9-bb2793dfe80b
+		summarizeBy: sum
+		sourceColumn: median_resolution_time
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition kpi_overview = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "nyc311"),
+				    public_v_kpi_overview = Source{[Schema="public",Item="v_kpi_overview"]}[Data]
+				in
+				    public_v_kpi_overview
+

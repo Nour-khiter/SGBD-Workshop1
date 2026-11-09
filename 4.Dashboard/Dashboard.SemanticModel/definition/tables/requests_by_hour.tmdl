@@ -1,0 +1,47 @@
+table requests_by_hour
+	lineageTag: 4f21cf63-45ab-47ba-b025-634c766ad7ee
+
+	measure 'Highlight Color requests_by_hour' = IF(MAX(requests_by_hour[requests]) = CALCULATE(MAX(requests_by_hour[requests]), ALLSELECTED(requests_by_hour[hour_of_day])), "#0B4F9E", "#B8C4D6")
+		formatString: @
+		lineageTag: 06fd61c3-2e3e-45d9-971e-c7253a50f1cb
+
+	column hour_of_day
+		dataType: double
+		lineageTag: 5c06efe2-4bf4-4f89-bc33-123822395eaa
+		summarizeBy: none
+		sourceColumn: hour_of_day
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column requests
+		dataType: int64
+		formatString: 0
+		lineageTag: b3140a7b-dc0a-4237-8542-bc2a32a1d956
+		summarizeBy: sum
+		sourceColumn: requests
+
+		annotation SummarizationSetBy = Automatic
+
+	column pct_of_requests
+		dataType: double
+		lineageTag: 40e55375-be29-4e05-a762-63b5e65c87bd
+		summarizeBy: sum
+		sourceColumn: pct_of_requests
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition requests_by_hour = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "nyc311"),
+				    public_v_requests_by_hour = Source{[Schema="public",Item="v_requests_by_hour"]}[Data]
+				in
+				    public_v_requests_by_hour
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,43 @@
+table top_zip_codes
+	lineageTag: 2ae27ac0-e38c-4ca5-961d-1a725e485918
+
+	column incident_zip
+		dataType: string
+		lineageTag: 2c2d593f-e993-42f2-9cd6-3def4fa2a2bd
+		summarizeBy: none
+		sourceColumn: incident_zip
+
+		annotation SummarizationSetBy = Automatic
+
+	column borough
+		dataType: string
+		lineageTag: 7b1f1a9c-6f1c-4db5-a7ec-35dbe85836da
+		summarizeBy: none
+		sourceColumn: borough
+
+		annotation SummarizationSetBy = Automatic
+
+	column request_count
+		dataType: int64
+		formatString: 0
+		lineageTag: 8e3ac1fc-bef7-405a-b850-7ef20fce1893
+		summarizeBy: sum
+		sourceColumn: request_count
+
+		annotation SummarizationSetBy = Automatic
+
+	partition top_zip_codes = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "nyc311"),
+				    Requests = Source{[Schema="public",Item="v_requests"]}[Data],
+				    KnownZipRows = Table.SelectRows(Requests, each [incident_zip] <> null and [incident_zip] <> "Unknown"),
+				    GroupedZipCounts = Table.Group(KnownZipRows, {"incident_zip", "borough"}, {{"request_count", each Table.RowCount(_), Int64.Type}}),
+				    SortedZipCounts = Table.Sort(GroupedZipCounts, {{"request_count", Order.Descending}, {"incident_zip", Order.Ascending}}),
+				    TopTenZipCodes = Table.FirstN(SortedZipCounts, 10)
+				in
+				    TopTenZipCodes
+
+	annotation PBI_ResultType = Table
+
