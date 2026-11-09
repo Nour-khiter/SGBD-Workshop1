@@ -4,9 +4,9 @@
   "position": {
     "x": 30,
     "y": 170,
-    "z": 0,
-    "width": 900,
+    "z": 1000,
     "height": 380,
+    "width": 900,
     "tabOrder": 200
   },
   "visual": {
@@ -26,30 +26,8 @@
                   "Property": "complaint_type"
                 }
               },
-              "queryRef": "resolution_by_type.complaint_type"
-            }
-          ]
-        },
-        "Y": {
-          "projections": [
-            {
-              "field": {
-                "Aggregation": {
-                  "Expression": {
-                    "Column": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "resolution_by_type"
-                        }
-                      },
-                      "Property": "median_days"
-                    }
-                  },
-                  "Function": 6
-                }
-              },
-              "queryRef": "Median(resolution_by_type.median_days)",
-              "nativeQueryRef": "Median days"
+              "queryRef": "resolution_by_type.complaint_type",
+              "active": true
             }
           ]
         },
@@ -73,6 +51,29 @@
               },
               "queryRef": "Sum(resolution_by_type.nb_closed)",
               "nativeQueryRef": "Closed sample count"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "resolution_by_type"
+                        }
+                      },
+                      "Property": "median_days"
+                    }
+                  },
+                  "Function": 6
+                }
+              },
+              "queryRef": "Median(resolution_by_type.median_days)",
+              "nativeQueryRef": "Median days"
             }
           ]
         }
@@ -100,6 +101,21 @@
         ],
         "isDefaultSort": true
       }
+    },
+    "objects": {
+      "labels": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
     },
     "visualContainerObjects": {
       "title": [
@@ -129,22 +145,7 @@
         }
       ]
     },
-    "drillFilterOtherVisuals": true,
-    "objects": {
-      "labels": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
-              }
-            }
-          }
-        }
-      ]
-    }
+    "drillFilterOtherVisuals": true
   },
   "filterConfig": {
     "filters": [

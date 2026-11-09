@@ -4,9 +4,9 @@
   "position": {
     "x": 990,
     "y": 670,
-    "z": 0,
-    "width": 900,
+    "z": 5000,
     "height": 300,
+    "width": 900,
     "tabOrder": 1660
   },
   "visual": {
@@ -26,7 +26,8 @@
                   "Property": "weekday_name"
                 }
               },
-              "queryRef": "requests_by_weekday.weekday_name"
+              "queryRef": "requests_by_weekday.weekday_name",
+              "active": true
             }
           ]
         },
@@ -73,35 +74,6 @@
         "isDefaultSort": true
       }
     },
-    "visualContainerObjects": {
-      "title": [
-        {
-          "properties": {
-            "text": {
-              "expr": {
-                "Literal": {
-                  "Value": "'Tuesday has the most requests'"
-                }
-              }
-            }
-          }
-        }
-      ],
-      "subTitle": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
-            }
-          }
-        }
-      ]
-    },
-    "drillFilterOtherVisuals": true,
     "objects": {
       "labels": [
         {
@@ -147,6 +119,35 @@
           }
         }
       ]
-    }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Tuesday has the most requests'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "subTitle": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
   }
 }

@@ -4,49 +4,15 @@
   "position": {
     "x": 30,
     "y": 170,
-    "z": 0,
-    "width": 900,
+    "z": 1000,
     "height": 420,
+    "width": 900,
     "tabOrder": 200
   },
   "visual": {
     "visualType": "azureMap",
     "query": {
       "queryState": {
-        "X": {
-          "projections": [
-            {
-              "field": {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "requests_by_borough"
-                    }
-                  },
-                  "Property": "map_longitude"
-                }
-              },
-              "queryRef": "requests_by_borough.map_longitude"
-            }
-          ]
-        },
-        "Y": {
-          "projections": [
-            {
-              "field": {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "requests_by_borough"
-                    }
-                  },
-                  "Property": "map_latitude"
-                }
-              },
-              "queryRef": "requests_by_borough.map_latitude"
-            }
-          ]
-        },
         "Series": {
           "projections": [
             {
@@ -84,6 +50,40 @@
               "active": true
             }
           ]
+        },
+        "X": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "requests_by_borough"
+                    }
+                  },
+                  "Property": "map_longitude"
+                }
+              },
+              "queryRef": "requests_by_borough.map_longitude"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "requests_by_borough"
+                    }
+                  },
+                  "Property": "map_latitude"
+                }
+              },
+              "queryRef": "requests_by_borough.map_latitude"
+            }
+          ]
         }
       }
     },
@@ -115,6 +115,33 @@
               "expr": {
                 "Literal": {
                   "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "mapControls": [
+        {
+          "properties": {
+            "zoom": {
+              "expr": {
+                "Literal": {
+                  "Value": "9.19D"
+                }
+              }
+            },
+            "centerLatitude": {
+              "expr": {
+                "Literal": {
+                  "Value": "40.71228213459304D"
+                }
+              }
+            },
+            "centerLongitude": {
+              "expr": {
+                "Literal": {
+                  "Value": "-73.97255000000001D"
                 }
               }
             }

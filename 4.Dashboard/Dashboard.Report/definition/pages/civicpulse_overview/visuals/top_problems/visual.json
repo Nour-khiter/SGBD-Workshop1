@@ -4,9 +4,9 @@
   "position": {
     "x": 990,
     "y": 300,
-    "z": 0,
-    "width": 900,
+    "z": 7000,
     "height": 350,
+    "width": 900,
     "tabOrder": 1290
   },
   "visual": {
@@ -26,7 +26,8 @@
                   "Property": "complaint_type"
                 }
               },
-              "queryRef": "top_complaint_types.complaint_type"
+              "queryRef": "top_complaint_types.complaint_type",
+              "active": true
             }
           ]
         },
@@ -78,35 +79,6 @@
         "isDefaultSort": true
       }
     },
-    "visualContainerObjects": {
-      "title": [
-        {
-          "properties": {
-            "text": {
-              "expr": {
-                "Literal": {
-                  "Value": "'Illegal parking leads the top complaint types'"
-                }
-              }
-            }
-          }
-        }
-      ],
-      "subTitle": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
-            }
-          }
-        }
-      ]
-    },
-    "drillFilterOtherVisuals": true,
     "objects": {
       "labels": [
         {
@@ -152,6 +124,35 @@
           }
         }
       ]
-    }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Illegal parking leads the top complaint types'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "subTitle": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
   }
 }

@@ -4,9 +4,9 @@
   "position": {
     "x": 30,
     "y": 1032,
-    "z": 1000,
-    "width": 1250,
+    "z": 10000,
     "height": 30,
+    "width": 1250,
     "tabOrder": 1062
   },
   "visual": {
@@ -22,7 +22,7 @@
                     "value": "2% sample of 2024 requests. Compare shares and rankings, not city totals.",
                     "textStyle": {
                       "fontFamily": "Segoe UI",
-                      "fontSize": 12,
+                      "fontSize": "12pt",
                       "color": "#536575",
                       "bold": false
                     }

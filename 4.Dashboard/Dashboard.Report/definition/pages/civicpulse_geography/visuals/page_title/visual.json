@@ -4,9 +4,9 @@
   "position": {
     "x": 30,
     "y": 22,
-    "z": 1000,
-    "width": 1250,
+    "z": 7000,
     "height": 58,
+    "width": 1250,
     "tabOrder": 52
   },
   "visual": {
@@ -22,7 +22,7 @@
                     "value": "Brooklyn leads request volume; Queens has most open requests",
                     "textStyle": {
                       "fontFamily": "Segoe UI",
-                      "fontSize": 25,
+                      "fontSize": "25pt",
                       "color": "#17324D",
                       "bold": true
                     }

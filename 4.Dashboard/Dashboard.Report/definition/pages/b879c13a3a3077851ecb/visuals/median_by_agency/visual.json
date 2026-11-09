@@ -3,10 +3,10 @@
   "name": "median_by_agency",
   "position": {
     "x": 990,
-    "y": 170,
+    "y": 22,
     "z": 0,
-    "width": 900,
     "height": 380,
+    "width": 900,
     "tabOrder": 1160
   },
   "visual": {
@@ -26,7 +26,8 @@
                   "Property": "agency_label"
                 }
               },
-              "queryRef": "resolution_by_agency.agency_label"
+              "queryRef": "resolution_by_agency.agency_label",
+              "active": true
             }
           ]
         },
@@ -78,6 +79,21 @@
         "isDefaultSort": true
       }
     },
+    "objects": {
+      "labels": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
     "visualContainerObjects": {
       "title": [
         {
@@ -106,22 +122,7 @@
         }
       ]
     },
-    "drillFilterOtherVisuals": true,
-    "objects": {
-      "labels": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
-              }
-            }
-          }
-        }
-      ]
-    }
+    "drillFilterOtherVisuals": true
   },
   "filterConfig": {
     "filters": [

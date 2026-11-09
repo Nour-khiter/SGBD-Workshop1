@@ -3,10 +3,10 @@
   "name": "open_closed_agency",
   "position": {
     "x": 990,
-    "y": 790,
-    "z": 0,
+    "y": 656,
+    "z": 2000,
+    "height": 344,
     "width": 900,
-    "height": 200,
     "tabOrder": 1780
   },
   "visual": {
@@ -26,7 +26,8 @@
                   "Property": "agency_label"
                 }
               },
-              "queryRef": "open_closed_by_agency.agency_label"
+              "queryRef": "open_closed_by_agency.agency_label",
+              "active": true
             }
           ]
         },
@@ -97,6 +98,21 @@
         "isDefaultSort": true
       }
     },
+    "objects": {
+      "labels": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
     "visualContainerObjects": {
       "title": [
         {
@@ -125,22 +141,7 @@
         }
       ]
     },
-    "drillFilterOtherVisuals": true,
-    "objects": {
-      "labels": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
-              }
-            }
-          }
-        }
-      ]
-    }
+    "drillFilterOtherVisuals": true
   },
   "filterConfig": {
     "filters": [
