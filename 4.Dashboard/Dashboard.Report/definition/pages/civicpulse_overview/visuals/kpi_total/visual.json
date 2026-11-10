@@ -4,9 +4,9 @@
   "position": {
     "x": 30,
     "y": 170,
-    "z": 3000,
-    "height": 110,
+    "z": 0,
     "width": 440,
+    "height": 110,
     "tabOrder": 200
   },
   "visual": {
@@ -33,21 +33,6 @@
         }
       }
     },
-    "objects": {
-      "value": [
-        {
-          "properties": {
-            "labelDisplayUnits": {
-              "expr": {
-                "Literal": {
-                  "Value": "1D"
-                }
-              }
-            }
-          }
-        }
-      ]
-    },
     "visualContainerObjects": {
       "title": [
         {
@@ -56,6 +41,21 @@
               "expr": {
                 "Literal": {
                   "Value": "'Total requests'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "objects": {
+      "value": [
+        {
+          "properties": {
+            "labelDisplayUnits": {
+              "expr": {
+                "Literal": {
+                  "Value": "1D"
                 }
               }
             }

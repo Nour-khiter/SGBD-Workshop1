@@ -4,9 +4,9 @@
   "position": {
     "x": 1410,
     "y": 170,
-    "z": 1000,
-    "height": 110,
+    "z": 0,
     "width": 480,
+    "height": 110,
     "tabOrder": 1580
   },
   "visual": {
@@ -33,21 +33,6 @@
         }
       }
     },
-    "objects": {
-      "value": [
-        {
-          "properties": {
-            "labelDisplayUnits": {
-              "expr": {
-                "Literal": {
-                  "Value": "1D"
-                }
-              }
-            }
-          }
-        }
-      ]
-    },
     "visualContainerObjects": {
       "title": [
         {
@@ -56,6 +41,21 @@
               "expr": {
                 "Literal": {
                   "Value": "'Median resolution (hours)'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "objects": {
+      "value": [
+        {
+          "properties": {
+            "labelDisplayUnits": {
+              "expr": {
+                "Literal": {
+                  "Value": "1D"
                 }
               }
             }

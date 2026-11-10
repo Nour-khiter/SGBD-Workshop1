@@ -3,10 +3,10 @@
   "name": "resolution_type_table",
   "position": {
     "x": 990,
-    "y": 416,
-    "z": 3000,
-    "height": 230,
+    "y": 570,
+    "z": 0,
     "width": 900,
+    "height": 210,
     "tabOrder": 1560
   },
   "visual": {

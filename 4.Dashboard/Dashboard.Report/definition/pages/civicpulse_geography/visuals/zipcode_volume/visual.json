@@ -3,10 +3,10 @@
   "name": "zipcode_volume",
   "position": {
     "x": 990,
-    "y": 705.55555555555554,
-    "z": 5000,
-    "height": 355.55555555555554,
+    "y": 615,
+    "z": 0,
     "width": 900,
+    "height": 355,
     "tabOrder": 1605
   },
   "visual": {
@@ -64,20 +64,55 @@
         "sort": [
           {
             "field": {
-              "Column": {
+              "Aggregation": {
                 "Expression": {
-                  "SourceRef": {
-                    "Entity": "top_zip_codes"
+                  "Column": {
+                    "Expression": {
+                      "SourceRef": {
+                        "Entity": "top_zip_codes"
+                      }
+                    },
+                    "Property": "request_count"
                   }
                 },
-                "Property": "request_count"
+                "Function": 0
               }
             },
             "direction": "Descending"
           }
-        ]
+        ],
+        "isDefaultSort": true
       }
     },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'10 busiest ZIP codes | SQL view excludes Unknown ZIPs'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "subTitle": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true,
     "objects": {
       "columnFormatting": [
         {
@@ -137,81 +172,6 @@
           }
         }
       ]
-    },
-    "visualContainerObjects": {
-      "title": [
-        {
-          "properties": {
-            "text": {
-              "expr": {
-                "Literal": {
-                  "Value": "'10 busiest ZIP codes | SQL view excludes Unknown ZIPs'"
-                }
-              }
-            }
-          }
-        }
-      ],
-      "subTitle": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
-            }
-          }
-        }
-      ]
-    },
-    "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "cb898dd9d003b5c6441b",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "top_zip_codes"
-              }
-            },
-            "Property": "incident_zip"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "5567ba174cc94e9b004c",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "top_zip_codes"
-              }
-            },
-            "Property": "borough"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "1dafaf6e644d687592a9",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "top_zip_codes"
-              }
-            },
-            "Property": "request_count"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
+    }
   }
 }

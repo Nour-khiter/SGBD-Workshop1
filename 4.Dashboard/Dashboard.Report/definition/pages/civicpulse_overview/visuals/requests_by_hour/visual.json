@@ -4,9 +4,9 @@
   "position": {
     "x": 30,
     "y": 670,
-    "z": 4000,
-    "height": 300,
+    "z": 0,
     "width": 900,
+    "height": 300,
     "tabOrder": 700
   },
   "visual": {
@@ -26,8 +26,7 @@
                   "Property": "hour_of_day"
                 }
               },
-              "queryRef": "requests_by_hour.hour_of_day",
-              "active": true
+              "queryRef": "requests_by_hour.hour_of_day"
             }
           ]
         },
@@ -74,6 +73,42 @@
         "isDefaultSort": true
       }
     },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Requests peak at 11:00'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "subTitle": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Peak: 11:00, with 2,766 requests (6.0% of the sample)'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true,
     "objects": {
       "labels": [
         {
@@ -119,42 +154,6 @@
           }
         }
       ]
-    },
-    "visualContainerObjects": {
-      "title": [
-        {
-          "properties": {
-            "text": {
-              "expr": {
-                "Literal": {
-                  "Value": "'Requests peak at 11:00'"
-                }
-              }
-            }
-          }
-        }
-      ],
-      "subTitle": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
-              }
-            },
-            "text": {
-              "expr": {
-                "Literal": {
-                  "Value": "'Peak: 11:00, with 2,766 requests (6.0% of the sample)'"
-                }
-              }
-            }
-          }
-        }
-      ]
-    },
-    "drillFilterOtherVisuals": true
+    }
   }
 }

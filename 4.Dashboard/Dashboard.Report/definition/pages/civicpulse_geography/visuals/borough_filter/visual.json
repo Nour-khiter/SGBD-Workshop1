@@ -5,8 +5,8 @@
     "x": 1530,
     "y": 25,
     "z": 0,
-    "height": 70,
     "width": 360,
+    "height": 70,
     "tabOrder": 1555
   },
   "visual": {
@@ -26,27 +26,11 @@
                   "Property": "borough"
                 }
               },
-              "queryRef": "requests_by_borough.borough",
-              "active": true
+              "queryRef": "requests_by_borough.borough"
             }
           ]
         }
       }
-    },
-    "objects": {
-      "data": [
-        {
-          "properties": {
-            "mode": {
-              "expr": {
-                "Literal": {
-                  "Value": "'Dropdown'"
-                }
-              }
-            }
-          }
-        }
-      ]
     },
     "visualContainerObjects": {
       "title": [
@@ -76,6 +60,21 @@
         }
       ]
     },
-    "drillFilterOtherVisuals": true
+    "drillFilterOtherVisuals": true,
+    "objects": {
+      "data": [
+        {
+          "properties": {
+            "mode": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Dropdown'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
   }
 }

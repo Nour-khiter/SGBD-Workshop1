@@ -4,9 +4,9 @@
   "position": {
     "x": 990,
     "y": 170,
-    "z": 3000,
-    "height": 250,
+    "z": 0,
     "width": 900,
+    "height": 250,
     "tabOrder": 1160
   },
   "visual": {
@@ -26,8 +26,7 @@
                   "Property": "borough"
                 }
               },
-              "queryRef": "requests_by_borough.borough",
-              "active": true
+              "queryRef": "requests_by_borough.borough"
             }
           ]
         },
@@ -74,6 +73,35 @@
         "isDefaultSort": true
       }
     },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Brooklyn has the highest request volume'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "subTitle": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true,
     "objects": {
       "labels": [
         {
@@ -119,35 +147,6 @@
           }
         }
       ]
-    },
-    "visualContainerObjects": {
-      "title": [
-        {
-          "properties": {
-            "text": {
-              "expr": {
-                "Literal": {
-                  "Value": "'Brooklyn has the highest request volume'"
-                }
-              }
-            }
-          }
-        }
-      ],
-      "subTitle": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
-            }
-          }
-        }
-      ]
-    },
-    "drillFilterOtherVisuals": true
+    }
   }
 }

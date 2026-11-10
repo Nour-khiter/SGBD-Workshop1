@@ -276,7 +276,7 @@ def main() -> None:
         chart("requests_per_month", "clusteredColumnChart", "Monthly requests, 2024", ("monthly_requests", "month"), ("monthly_requests", "total_requests", 0), (30, 300, 900, 310), "Requests", False),
         chart("top_problems", "clusteredBarChart", "Illegal parking leads the top complaint types", ("top_complaint_types", "complaint_type"), ("top_complaint_types", "request_count", 0), (990, 300, 900, 350), "Requests", True),
         chart("requests_by_hour", "clusteredColumnChart", "Requests peak at 11:00", ("requests_by_hour", "hour_of_day"), ("requests_by_hour", "requests", 0), (30, 670, 900, 300), "Requests", False),
-        chart("requests_by_weekday", "clusteredColumnChart", "Tuesday has the most requests", ("requests_by_weekday", "weekday_name"), ("requests_by_weekday", "requests", 0), (990, 670, 900, 300), "Requests", False),
+        chart("requests_by_weekday", "clusteredColumnChart", "Monday has the most requests", ("requests_by_weekday", "weekday_name"), ("requests_by_weekday", "requests", 0), (990, 670, 900, 300), "Requests", False),
     ]
     month_chart = next(v for v in overview_visuals if v["name"] == "requests_per_month")
     month_chart["visual"]["query"]["sortDefinition"] = {"sort": [{"field": column("monthly_requests", "month"), "direction": "Ascending"}], "isDefaultSort": True}

@@ -4,9 +4,9 @@
   "position": {
     "x": 30,
     "y": 170,
-    "z": 1000,
-    "height": 380,
+    "z": 0,
     "width": 900,
+    "height": 380,
     "tabOrder": 200
   },
   "visual": {
@@ -26,31 +26,7 @@
                   "Property": "complaint_type"
                 }
               },
-              "queryRef": "resolution_by_type.complaint_type",
-              "active": true
-            }
-          ]
-        },
-        "Tooltips": {
-          "projections": [
-            {
-              "field": {
-                "Aggregation": {
-                  "Expression": {
-                    "Column": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "resolution_by_type"
-                        }
-                      },
-                      "Property": "nb_closed"
-                    }
-                  },
-                  "Function": 0
-                }
-              },
-              "queryRef": "Sum(resolution_by_type.nb_closed)",
-              "nativeQueryRef": "Closed sample count"
+              "queryRef": "resolution_by_type.complaint_type"
             }
           ]
         },
@@ -74,6 +50,29 @@
               },
               "queryRef": "Median(resolution_by_type.median_days)",
               "nativeQueryRef": "Median days"
+            }
+          ]
+        },
+        "Tooltips": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "resolution_by_type"
+                        }
+                      },
+                      "Property": "nb_closed"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(resolution_by_type.nb_closed)",
+              "nativeQueryRef": "Closed sample count"
             }
           ]
         }
@@ -101,21 +100,6 @@
         ],
         "isDefaultSort": true
       }
-    },
-    "objects": {
-      "labels": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
-              }
-            }
-          }
-        }
-      ]
     },
     "visualContainerObjects": {
       "title": [
@@ -145,7 +129,22 @@
         }
       ]
     },
-    "drillFilterOtherVisuals": true
+    "drillFilterOtherVisuals": true,
+    "objects": {
+      "labels": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
   },
   "filterConfig": {
     "filters": [

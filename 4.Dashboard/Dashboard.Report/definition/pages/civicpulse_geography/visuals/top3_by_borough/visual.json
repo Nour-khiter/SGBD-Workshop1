@@ -4,33 +4,15 @@
   "position": {
     "x": 30,
     "y": 615,
-    "z": 4000,
-    "height": 355,
+    "z": 0,
     "width": 900,
+    "height": 355,
     "tabOrder": 645
   },
   "visual": {
     "visualType": "pivotTable",
     "query": {
       "queryState": {
-        "Columns": {
-          "projections": [
-            {
-              "field": {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "top3_types_by_borough"
-                    }
-                  },
-                  "Property": "rank"
-                }
-              },
-              "queryRef": "top3_types_by_borough.rank",
-              "active": true
-            }
-          ]
-        },
         "Rows": {
           "projections": [
             {
@@ -44,8 +26,24 @@
                   "Property": "borough"
                 }
               },
-              "queryRef": "top3_types_by_borough.borough",
-              "active": true
+              "queryRef": "top3_types_by_borough.borough"
+            }
+          ]
+        },
+        "Columns": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "top3_types_by_borough"
+                    }
+                  },
+                  "Property": "rank"
+                }
+              },
+              "queryRef": "top3_types_by_borough.rank"
             }
           ]
         },
@@ -120,6 +118,60 @@
         }
       ]
     },
-    "drillFilterOtherVisuals": true
+    "drillFilterOtherVisuals": true,
+    "objects": {
+      "rowGrandTotal": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnGrandTotal": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "rowSubtotals": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnSubtotals": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
   }
 }

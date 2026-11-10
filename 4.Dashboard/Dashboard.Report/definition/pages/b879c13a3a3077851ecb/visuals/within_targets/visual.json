@@ -3,10 +3,10 @@
   "name": "within_targets",
   "position": {
     "x": 30,
-    "y": 580,
-    "z": 4000,
-    "height": 420,
+    "y": 570,
+    "z": 0,
     "width": 900,
+    "height": 420,
     "tabOrder": 600
   },
   "visual": {
@@ -26,8 +26,7 @@
                   "Property": "agency_label"
                 }
               },
-              "queryRef": "solved_within_by_agency.agency_label",
-              "active": true
+              "queryRef": "solved_within_by_agency.agency_label"
             }
           ]
         },
@@ -93,21 +92,6 @@
         "isDefaultSort": true
       }
     },
-    "objects": {
-      "labels": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
-              }
-            }
-          }
-        }
-      ]
-    },
     "visualContainerObjects": {
       "title": [
         {
@@ -136,6 +120,21 @@
         }
       ]
     },
-    "drillFilterOtherVisuals": true
+    "drillFilterOtherVisuals": true,
+    "objects": {
+      "labels": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
   }
 }

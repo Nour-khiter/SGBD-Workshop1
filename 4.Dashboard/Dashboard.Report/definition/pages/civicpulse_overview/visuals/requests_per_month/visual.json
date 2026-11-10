@@ -4,9 +4,9 @@
   "position": {
     "x": 30,
     "y": 300,
-    "z": 6000,
-    "height": 310,
+    "z": 0,
     "width": 900,
+    "height": 310,
     "tabOrder": 330
   },
   "visual": {
@@ -26,8 +26,7 @@
                   "Property": "month"
                 }
               },
-              "queryRef": "monthly_requests.month",
-              "active": true
+              "queryRef": "monthly_requests.month"
             }
           ]
         },
@@ -74,6 +73,35 @@
         "isDefaultSort": true
       }
     },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Monthly requests, 2024'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "subTitle": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true,
     "objects": {
       "labels": [
         {
@@ -119,35 +147,6 @@
           }
         }
       ]
-    },
-    "visualContainerObjects": {
-      "title": [
-        {
-          "properties": {
-            "text": {
-              "expr": {
-                "Literal": {
-                  "Value": "'Monthly requests, 2024'"
-                }
-              }
-            }
-          }
-        }
-      ],
-      "subTitle": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
-            }
-          }
-        }
-      ]
-    },
-    "drillFilterOtherVisuals": true
+    }
   }
 }

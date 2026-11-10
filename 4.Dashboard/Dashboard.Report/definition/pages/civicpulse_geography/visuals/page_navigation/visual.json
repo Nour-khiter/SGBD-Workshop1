@@ -4,13 +4,28 @@
   "position": {
     "x": 30,
     "y": 96,
-    "z": 6000,
-    "height": 48,
+    "z": 1000,
     "width": 700,
+    "height": 48,
     "tabOrder": 126
   },
   "visual": {
     "visualType": "pageNavigator",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "orientation": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Horizontal'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
     "drillFilterOtherVisuals": true
   }
 }

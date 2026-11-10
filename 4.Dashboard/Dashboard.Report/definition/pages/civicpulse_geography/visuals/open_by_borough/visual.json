@@ -4,9 +4,9 @@
   "position": {
     "x": 990,
     "y": 440,
-    "z": 2000,
-    "height": 250,
+    "z": 0,
     "width": 900,
+    "height": 250,
     "tabOrder": 1430
   },
   "visual": {
@@ -26,8 +26,7 @@
                   "Property": "borough"
                 }
               },
-              "queryRef": "open_requests_by_borough.borough",
-              "active": true
+              "queryRef": "open_requests_by_borough.borough"
             }
           ]
         },
@@ -74,6 +73,35 @@
         "isDefaultSort": true
       }
     },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Queens has the highest open rate'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "subTitle": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true,
     "objects": {
       "labels": [
         {
@@ -119,35 +147,6 @@
           }
         }
       ]
-    },
-    "visualContainerObjects": {
-      "title": [
-        {
-          "properties": {
-            "text": {
-              "expr": {
-                "Literal": {
-                  "Value": "'Queens has the highest open rate'"
-                }
-              }
-            }
-          }
-        }
-      ],
-      "subTitle": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
-            }
-          }
-        }
-      ]
-    },
-    "drillFilterOtherVisuals": true
+    }
   }
 }

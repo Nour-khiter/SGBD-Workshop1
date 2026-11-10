@@ -4,9 +4,9 @@
   "position": {
     "x": 30,
     "y": 22,
-    "z": 6000,
-    "height": 58,
+    "z": 1000,
     "width": 1250,
+    "height": 58,
     "tabOrder": 52
   },
   "visual": {
@@ -22,7 +22,7 @@
                     "value": "Resolution speed varies by agency and problem type",
                     "textStyle": {
                       "fontFamily": "Segoe UI",
-                      "fontSize": "25pt",
+                      "fontSize": 25,
                       "color": "#17324D",
                       "bold": true
                     }

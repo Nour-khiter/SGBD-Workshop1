@@ -4,9 +4,9 @@
   "position": {
     "x": 30,
     "y": 22,
-    "z": 9000,
-    "height": 58,
+    "z": 1000,
     "width": 1250,
+    "height": 58,
     "tabOrder": 52
   },
   "visual": {
@@ -22,7 +22,7 @@
                     "value": "Illegal parking and residential noise lead 311 demand",
                     "textStyle": {
                       "fontFamily": "Segoe UI",
-                      "fontSize": "25pt",
+                      "fontSize": 25,
                       "color": "#17324D",
                       "bold": true
                     }
